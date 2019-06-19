@@ -28,20 +28,45 @@ let allEnemies = ['sprite'];
 // a handleInput() method.
 class Player {
     constructor() {
-        this.x = 0;
-        this.y = 0;
+        this.x = 200;
+        this.y = 400;
         this.boy = 'images/char-boy.png';
+        this.score = 0;
     }
     update() {
 
     }
 
+    /**
+     * @Description: Render the player image on the x and y position
+     */
     render() {
         ctx.drawImage(Resources.get(this.boy), this.x, this.y);
     }
 
-    handleInput() {
-
+    /**
+     * @Description: Handle event listener
+     * @Param {string} arrowEvent : Update player position when key is pressed
+     */
+    handleInput(arrowEvent) {
+        switch (arrowEvent) {
+            case 'left':
+                this.x -= 100;
+                console.log('Left');
+                break;
+            case 'up':
+                this.y -= 85;
+                console.log('Up');
+                break;
+            case 'right':
+                this.x += 100;
+                console.log('Right');
+                break;
+            case 'down':
+                this.y += 85;
+                console.log('Down');
+                break;
+        }
     }
 }
 
@@ -60,7 +85,7 @@ Player.prototype.reset = function() {
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
-    let allowedKeys = {
+    const allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
