@@ -1,50 +1,67 @@
-const initX = 204;
-const initY = 400;
+// Starting position Players
+const initPlayerX = 204;
+const initPlayerY = 400;
+
+// Positioning Enemy
+const enemyBoundary = 500;
+const resetEnemy = -100;
 
 // Enemies our player must avoid
-const Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
+class Enemy {
+    constructor(x, y) {
+        this.sprite = 'images/enemy-bug.png';
+        this.x = -100;
+        this.y = y + 60;
+    }
 
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-};
+    /**
+     * @Description - Apply enemy movement
+     * @param {string} dt - Apply delta time
+     */
+    update(dt) {
+        setTimeout(() => {
+            if (this.x < enemyBoundary ) {
+                this.x += 250 * dt;
+            } else {
+                this.x = resetEnemy;
+            }
+        }, 500);
+    }
+
+    /**
+     * @Description - Draw enemy image on the page
+     */
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+}
+
+const allEnemies = [
+    new Enemy(-100, 0),
+    new Enemy(-100, 83),
+    new Enemy(-100, 166)
+];
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
+// Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-};
+// };
 
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
-let allEnemies = ['sprite'];
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 class Player {
     constructor(x, y) {
-        this.boy = 'images/char-boy.png';
-        this.score = 0;
 
-        // this.col = 101;
-        // this.row = 83;
-        // this.startCol = this.col * 2;
-        // this.startRow = this.row * 5;
-
-        // this.x = 204;
-        // this.y = 400;
-        // this.x = this.startCol;
-        // this.y = this.startRow;
         this.x = x;
         this.y = y;
+        this.boy = 'images/char-boy.png';
+        this.score = 0;
     }
     update() {
 
@@ -70,7 +87,7 @@ class Player {
                 }
                 break;
             case 'up':
-                if(this.y > 0) {
+                if (this.y > 60) {
                     this.y -= 85;
                     console.log('Up');
                 }
@@ -91,7 +108,7 @@ class Player {
     }
 }
 
-const player = new Player(initX, initY);
+const player = new Player(initPlayerX, initPlayerY);
 
 function resetPlayer() {
     this.x = 204;
