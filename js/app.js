@@ -36,6 +36,10 @@ class Enemy {
     }
 }
 
+/**
+ *
+ * @type {Enemy[]} - Spawn three bugs on different rows
+ */
 const allEnemies = [
     new Enemy(-100, 0),
     new Enemy(-100, 83),
@@ -57,7 +61,6 @@ const allEnemies = [
 // a handleInput() method.
 class Player {
     constructor(x, y) {
-
         this.x = x;
         this.y = y;
         this.boy = 'images/char-boy.png';
