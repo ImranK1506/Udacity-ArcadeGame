@@ -1,3 +1,6 @@
+const initX = 204;
+const initY = 400;
+
 // Enemies our player must avoid
 const Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -27,11 +30,21 @@ let allEnemies = ['sprite'];
 // This class requires an update(), render() and
 // a handleInput() method.
 class Player {
-    constructor() {
-        this.x = 200;
-        this.y = 400;
+    constructor(x, y) {
         this.boy = 'images/char-boy.png';
         this.score = 0;
+
+        // this.col = 101;
+        // this.row = 83;
+        // this.startCol = this.col * 2;
+        // this.startRow = this.row * 5;
+
+        // this.x = 204;
+        // this.y = 400;
+        // this.x = this.startCol;
+        // this.y = this.startRow;
+        this.x = x;
+        this.y = y;
     }
     update() {
 
@@ -51,30 +64,39 @@ class Player {
     handleInput(arrowEvent) {
         switch (arrowEvent) {
             case 'left':
-                this.x -= 100;
-                console.log('Left');
+                if (this.x > 4) {
+                    this.x -= 100;
+                    console.log('Left');
+                }
                 break;
             case 'up':
-                this.y -= 85;
-                console.log('Up');
+                if(this.y > 0) {
+                    this.y -= 85;
+                    console.log('Up');
+                }
                 break;
             case 'right':
-                this.x += 100;
-                console.log('Right');
+                if (this.x < 400) {
+                    this.x += 100;
+                    console.log('Right');
+                }
                 break;
             case 'down':
-                this.y += 85;
-                console.log('Down');
+                if (this.y < 400) {
+                    this.y += 85;
+                    console.log('Down');
+                }
                 break;
         }
     }
 }
 
-const player = new Player();
+const player = new Player(initX, initY);
 
-Player.prototype.reset = function() {
-
-};
+function resetPlayer() {
+    this.x = 204;
+    this.y = 400;
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
