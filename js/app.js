@@ -8,10 +8,11 @@ const resetEnemy = -100;
 
 // Enemies our player must avoid
 class Enemy {
-    constructor(x, y) {
+    constructor(x, y, speed) {
         this.sprite = 'images/enemy-bug.png';
         this.x = -100;
         this.y = y + 60;
+        this.speed = speed;
     }
 
     /**
@@ -21,7 +22,7 @@ class Enemy {
     update(dt) {
         setTimeout(() => {
             if (this.x < enemyBoundary ) {
-                this.x += 250 * dt;
+                this.x += this.speed * dt;
             } else {
                 this.x = resetEnemy;
             }
@@ -41,9 +42,9 @@ class Enemy {
  * @type {Enemy[]} - Spawn three bugs on different rows
  */
 const allEnemies = [
-    new Enemy(-100, 0),
-    new Enemy(-100, 83),
-    new Enemy(-100, 166)
+    new Enemy(-100, 0, 200),
+    new Enemy(-100, 83, 280),
+    new Enemy(-100, 166, 220)
 ];
 
 // Update the enemy's position, required method for game
