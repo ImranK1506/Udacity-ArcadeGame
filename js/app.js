@@ -6,7 +6,12 @@ const initPlayerY = 400;
 const enemyBoundary = 500;
 const resetEnemy = -100;
 
-// Enemies our player must avoid
+// Collision
+const collision = 60;
+
+/**
+ * @Description - Enemy class with it's methods
+ */
 class Enemy {
     constructor(x, y, speed) {
         this.sprite = 'images/enemy-bug.png';
@@ -47,19 +52,9 @@ const allEnemies = [
     new Enemy(-100, 166, 220)
 ];
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-// Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-// };
-
-// Draw the enemy on the screen, required method for game
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+/**
+ * @Description - Player class with it's methods
+ */
 class Player {
     constructor(x, y) {
         this.x = x;
@@ -67,8 +62,17 @@ class Player {
         this.boy = 'images/char-boy.png';
         this.score = 0;
     }
+    reset(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+    /**
+     * @Description - Checks if user reaches water and updates points
+     */
     update() {
-
+        if (this.y <= 0) {
+            this.reset(initPlayerX, initPlayerY);
+        }
     }
 
     /**
@@ -91,7 +95,7 @@ class Player {
                 }
                 break;
             case 'up':
-                if (this.y > 60) {
+                if (this.y > 0) {
                     this.y -= 85;
                     console.log('Up');
                 }
@@ -114,16 +118,14 @@ class Player {
 
 const player = new Player(initPlayerX, initPlayerY);
 
-function resetPlayer() {
-    this.x = 204;
-    this.y = 400;
+function checkCollisions() {
+    for (let enemy of allEnemies) {
+        // console.log(enemy);
+        if (this.y >= this.y ) {
+
+        }
+    }
 }
-
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
