@@ -67,7 +67,10 @@ class Player {
         this.y = y;
     }
     /**
-     * @Description - Checks if user reaches water and updates points
+     * @Description - Checks the following:
+     *                > User collides with water and resets the player to it's initial position
+     *                > User collides with enemy and resets the player to it's initial position
+     *                > Updates the score
      */
     update() {
         if (this.y <= 0) {
