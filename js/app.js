@@ -6,8 +6,8 @@ const initPlayerY = 400;
 const enemyBoundary = 500;
 const resetEnemy = -100;
 
-// Collision
-const collision = 60;
+// Score
+let score = 0;
 
 /**
  * @Description - Enemy class with it's methods
@@ -15,7 +15,7 @@ const collision = 60;
 class Enemy {
     constructor(x, y, speed) {
         this.sprite = 'images/enemy-bug.png';
-        this.x = -100;
+        this.x = x;
         this.y = y + 60;
         this.speed = speed;
     }
@@ -44,23 +44,26 @@ class Enemy {
 
 /**
  *
- * @type {Enemy[]} - Spawn three bugs on different rows
+ * @type {Enemy[]} - Spawn three bugs on different rows with individual speeds
  */
 const allEnemies = [
     new Enemy(-100, 0, 200),
-    new Enemy(-100, 83, 280),
-    new Enemy(-100, 166, 220)
+    new Enemy(-100, 85, 280),
+    new Enemy(-100, 170, 220)
 ];
 
 /**
  * @Description - Player class with it's methods
+ *                > reset()       - reset the x and y positioning
+*                 > update()      - check if Player reaches water or enemy and resets it's position
+ *                > render()      - render the image and it's starting position to the screen
+ *                > handleInput() - handle eventListeners on user input
  */
 class Player {
     constructor(x, y) {
         this.x = x;
         this.y = y;
         this.boy = 'images/char-boy.png';
-        this.score = 0;
     }
     reset(x, y) {
         this.x = x;
@@ -69,12 +72,13 @@ class Player {
     /**
      * @Description - Checks the following:
      *                > User collides with water and resets the player to it's initial position
-     *                > User collides with enemy and resets the player to it's initial position
      *                > Updates the score
      */
     update() {
         if (this.y <= 0) {
             this.reset(initPlayerX, initPlayerY);
+            score -= 1;
+            console.log('Collide with water');
         }
     }
 
@@ -121,12 +125,21 @@ class Player {
 
 const player = new Player(initPlayerX, initPlayerY);
 
+/**
+ * @Description - Checks collision between Player and Enemy
+ */
 function checkCollisions() {
+    // Collision space between Player and Enemy
+    const collision = 70;
     for (let enemy of allEnemies) {
         // console.log(enemy);
-        if (this.y >= this.y ) {
-
+        if ((player.y >= enemy.y - collision && player.y <= enemy.y + collision)
+            &&
+            (player.x >= enemy.x - collision && player.x <= enemy.x + collision)) {
+            player.reset(initPlayerX, initPlayerY);
+            console.log('Collide with enemy');
         }
+        // console.log('Player ' + player.y + ', Enemy ' +  enemy.y)
     }
 }
 
