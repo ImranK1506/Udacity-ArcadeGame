@@ -77,8 +77,11 @@ class Player {
     update() {
         if (this.y <= 0) {
             this.reset(initPlayerX, initPlayerY);
-            score -= 1;
+            if (score >= 1) {
+                score -= 1;
+            }
             console.log('Collide with water');
+            console.log('Score dropped by ' + score + ' point(s)!');
         }
     }
 
@@ -137,7 +140,11 @@ function checkCollisions() {
             &&
             (player.x >= enemy.x - collision && player.x <= enemy.x + collision)) {
             player.reset(initPlayerX, initPlayerY);
+            if (score >= 1) {
+                score -= 1;
+            }
             console.log('Collide with enemy');
+            console.log('Score dropped by ' + score + ' point(s)!');
         }
         // console.log('Player ' + player.y + ', Enemy ' +  enemy.y)
     }
