@@ -19,13 +19,13 @@ body {
     font-size: 25px;
 }
 
-.score-panel .stars {
+.score-panel .hearts {
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
 }
 
-.score-panel .stars li {
+.score-panel .hearts li {
     list-style: none;
     display: inline-block;
 }

@@ -129,9 +129,9 @@ const player = new Player(initPlayerX, initPlayerY);
 /**
  * @Description - Rating
  */
-const starsCounter = document.querySelector('.stars');
+const heartsCounter = document.querySelector('.hearts');
 const starImage = `<li><i class="fab fa-gratipay"></i></li>`;
-starsCounter.innerHTML = starImage + starImage + starImage;
+heartsCounter.innerHTML = starImage + starImage + starImage;
 
 /**
  * @Description - Checks collision between Player and Enemy
@@ -147,7 +147,7 @@ const checkCollisions = () => {
 
             player.reset(initPlayerX, initPlayerY);
 
-            // reduceStars();
+            // reduceHearts();
             console.log('Collide with enemy');
             // console.log('Score dropped by ' + score + ' point(s)!');
         }
@@ -204,6 +204,7 @@ const resetTimer = () => {
 const resetButton = () => {
     document.querySelector('.restart').addEventListener('click', () => {
         player.reset(initPlayerX, initPlayerY);
+        this.x = resetEnemy;
         resetGame();
     })
 };
@@ -258,9 +259,9 @@ resetButton();
 /*
  * Increment moves
  */
-// const reduceStars = () => {
-//     const starsCounter = document.querySelector('.stars');
-//     starsCounter.innerHTML = score + starImage;
+// const reduceHearts = () => {
+//     const heartsCounter = document.querySelector('.hearts');
+//     heartsCounter.innerHTML = score + starImage;
 //     score--;
 //     console.log('Score ' + score);
 // };
@@ -307,11 +308,11 @@ resetButton();
 //  */
 // const checkScore = () => {
 //     if (moves <= 16 ) {
-//         starsCounter.innerHTML = starImage + starImage + starImage;
+//         heartsCounter.innerHTML = starImage + starImage + starImage;
 //     } else if (moves <= 24) {
-//         starsCounter.innerHTML = starImage + starImage;
+//         heartsCounter.innerHTML = starImage + starImage;
 //     } else {
-//         starsCounter.innerHTML = starImage;
+//         heartsCounter.innerHTML = starImage;
 //     }
 // };
 
