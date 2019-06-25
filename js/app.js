@@ -25,13 +25,11 @@ class Enemy {
      * @param {string} dt - Apply delta time
      */
     update(dt) {
-        setTimeout(() => {
-            if (this.x < enemyBoundary ) {
-                this.x += this.speed * dt;
-            } else {
-                this.x = resetEnemy;
-            }
-        }, 500);
+        if (this.x < enemyBoundary ) {
+            this.x += this.speed * dt;
+        } else {
+            this.x = resetEnemy;
+        }
     }
 
     /**
@@ -76,8 +74,9 @@ class Player {
      */
     update() {
         if (this.y <= 0) {
+            checkScore();
             this.reset(initPlayerX, initPlayerY);
-
+            console.log(score);
             console.log('Collide with water');
             // console.log('Score dropped by ' + score + ' point(s)!');
         }
@@ -129,14 +128,16 @@ const player = new Player(initPlayerX, initPlayerY);
 /**
  * @Description - Rating
  */
-const heartsCounter = document.querySelector('.hearts');
-const starImage = `<li><i class="fab fa-gratipay"></i></li>`;
-heartsCounter.innerHTML = starImage + starImage + starImage;
+// const initHearts = () => {
+//     const heartsCounter = document.querySelector('.hearts');
+//     const heartImage = `<li><i class="fab fa-gratipay"></i></li>`;
+//     heartsCounter.innerHTML = heartImage + heartImage;
+// };
 
 /**
  * @Description - Checks collision between Player and Enemy
  */
-const checkCollisions = () => {
+ const checkCollisions = () => {
     // Collision space between Player and Enemy
     const collision = 70;
     for (let enemy of allEnemies) {
@@ -146,13 +147,35 @@ const checkCollisions = () => {
             (player.x >= enemy.x - collision && player.x <= enemy.x + collision)) {
 
             player.reset(initPlayerX, initPlayerY);
-
-            // reduceHearts();
+            resetScore();
+            // alert('start again!');
             console.log('Collide with enemy');
             // console.log('Score dropped by ' + score + ' point(s)!');
+            // heartsCounter.innerHTML = heartImage.repeat(2)
+
         }
         // console.log('Player ' + player.y + ', Enemy ' +  enemy.y)
     }
+};
+
+/**
+ * @Description - Set score
+ * @type {number} - Initial state
+ */
+let score = 1;
+
+const checkScore = () => {
+    const scoreTick = document.querySelector('.score');
+    scoreTick.innerHTML = 'Score: ' + score;
+    score++;
+};
+
+/**
+ * @Description - Reset score
+ */
+const resetScore = () => {
+    score = 0;
+    document.querySelector('.score').innerHTML = 'Score: ' + score;
 };
 
 /**
@@ -204,18 +227,19 @@ const resetTimer = () => {
 const resetButton = () => {
     document.querySelector('.restart').addEventListener('click', () => {
         player.reset(initPlayerX, initPlayerY);
-        this.x = resetEnemy;
-        resetGame();
+        initGame();
     })
 };
 
 /**
  * @Description - Reset the game
  */
-const resetGame = () => {
+const initGame = () => {
     // Reset the timer
     resetTimer();
-    // Reset the hearts
+    // Reset the score
+    resetScore();
+    // heartsCounter.innerHTML = heartImage + heartImage + heartImage;
     // Reset enemies
     // Reset player
 };
@@ -246,7 +270,7 @@ const endGame = () => {
  * @Description - Replay the game
  */
 function replayGame() {
-    resetGame();
+    initGame();
     toggleModal();
 }
 
@@ -254,7 +278,6 @@ function replayGame() {
  * @Description - Reset button
  */
 resetButton();
-
 
 /*
  * Increment moves
@@ -301,19 +324,6 @@ resetButton();
 //         [array[i], array[j]] = [array[j], array[i]]
 //     }
 //     return array;
-// };
-
-// /**
-//  * @Description - Check score
-//  */
-// const checkScore = () => {
-//     if (moves <= 16 ) {
-//         heartsCounter.innerHTML = starImage + starImage + starImage;
-//     } else if (moves <= 24) {
-//         heartsCounter.innerHTML = starImage + starImage;
-//     } else {
-//         heartsCounter.innerHTML = starImage;
-//     }
 // };
 
 // This listens for key presses and sends the keys to your
