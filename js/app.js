@@ -43,7 +43,7 @@ class Enemy {
 /**
  * @type {Enemy[]} - Spawn three bugs on different rows with individual speeds
  */
-const allEnemies = [
+let allEnemies = [
     new Enemy(-100, 0, 200),
     new Enemy(-100, 85, 280),
     new Enemy(-100, 170, 220)
@@ -237,8 +237,6 @@ const initGame = () => {
     resetTimer();
     // Reset the score
     resetScore();
-    // Reset enemies
-    // Reset player
 };
 
 /**
@@ -247,8 +245,6 @@ const initGame = () => {
 const toggleModal = () => {
     const modal = document.querySelector('.modal');
     modal.classList.toggle('hidden');
-    // modalResults();
-
 };
 
 /**
@@ -274,6 +270,13 @@ const modalResults = () => {
     totalScore.innerHTML = `Total score: ${score}`;
 };
 
+const reset = () => {
+    allEnemies = [];
+    for (let i = 0; i < 4; i++) {
+        allEnemies.push(new Enemy);
+    }
+};
+
 const endGame = () => {
     toggleModal();
     clearTimer();
@@ -292,16 +295,6 @@ function replayGame() {
  * @Description - Reset button
  */
 resetButton();
-
-/*
- * Increment moves
- */
-// const reduceHearts = () => {
-//     const heartsCounter = document.querySelector('.hearts');
-//     heartsCounter.innerHTML = score + starImage;
-//     score--;
-//     console.log('Score ' + score);
-// };
 
 // const gemCollection = () => {
 //
