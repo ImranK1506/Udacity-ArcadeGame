@@ -10,7 +10,7 @@
 * Use the keyboard arrows to reach the water.
 * If you reach the water, you get 1 Score.
 * If you get caught by the enemies, a modal with your results will appear.
-* When you click the modal away, the game will be reset
+* When you click the modal away, the game will reset
 
 ## Methods
 
