@@ -80,7 +80,6 @@ const Engine = (function(global) {
     function update(dt) {
         updateEntities(dt);
         checkCollisions();
-        // loseHearts();
     }
 
     /* This is called by the update function and loops through all of the
@@ -140,7 +139,6 @@ const Engine = (function(global) {
         }
 
         renderEntities();
-        // initHearts();
     }
 
     /* This function is called by the render function and is called on each game

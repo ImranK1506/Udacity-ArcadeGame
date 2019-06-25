@@ -11,6 +11,8 @@ let timerOff = true;
 
 /**
  * @Description - Enemy class with it's methods
+ *                > update()
+ *                > render()
  */
 class Enemy {
     constructor(x, y, speed) {
@@ -51,10 +53,10 @@ let allEnemies = [
 
 /**
  * @Description - Player class with it's methods
- *                > reset()       - reset the x and y positioning
-*                 > update()      - check if Player reaches water or enemy and resets it's position
- *                > render()      - render the image and it's starting position to the screen
- *                > handleInput() - handle eventListeners on user input
+ *                > reset()
+ *                > update()
+ *                > render()
+ *                > handleInput()
  */
 class Player {
     constructor(x, y) {

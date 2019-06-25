@@ -7,14 +7,31 @@
 
 ## Instructions
 
-Use this [rubric](https://review.udacity.com/#!/rubrics/15/view) for self-checking your submission.
+* Use the keyboard arrows to reach the water.
+* If you reach the water, you get 1 Score.
+* If you get caught by the enemies, a modal with your results will appear.
+* When you click the modal away, the game will be reset
 
-Make sure the functions you write are **object-oriented** - either class functions (like `Player` and `Enemy`) or class prototype functions such as `Enemy.prototype.checkCollisions`. Also make sure that the keyword `this` is used appropriately within your class and class prototype functions to refer to the object the function is called upon.
+## Methods
 
-Your **README.md** file should be updated with instructions on both how to 1. Run and 2. Play your arcade game.
+#### class Enemy
+````
+update()        -   Apply enemy movement
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+render()        -   Render the enemy
+````
 
-## Descripion
+#### class Player
+````
+reset()         -   Reset player starting position
+
+update()        -   Checks when the player collides with the water and updates the score
+
+render()        -   Render the player
+
+handleInput()   -   Handle keyboard events
+````
+
+## Descriptions
 
 Used [jsdoc](https://devhints.io/jsdoc) as a reference to describe functions in app.js
