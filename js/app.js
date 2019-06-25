@@ -4,7 +4,7 @@ const initPlayerY = 400;
 
 // Positioning Enemy
 const enemyBoundary = 500;
-const resetEnemy = -100;
+let resetEnemy = -100;
 
 // Timer
 let timerOff = true;
@@ -41,7 +41,6 @@ class Enemy {
 }
 
 /**
- *
  * @type {Enemy[]} - Spawn three bugs on different rows with individual speeds
  */
 const allEnemies = [
@@ -74,7 +73,7 @@ class Player {
      */
     update() {
         if (this.y <= 0) {
-            checkScore();
+            setScore();
             this.reset(initPlayerX, initPlayerY);
             console.log(score);
             console.log('Collide with water');
@@ -126,15 +125,6 @@ class Player {
 const player = new Player(initPlayerX, initPlayerY);
 
 /**
- * @Description - Rating
- */
-// const initHearts = () => {
-//     const heartsCounter = document.querySelector('.hearts');
-//     const heartImage = `<li><i class="fab fa-gratipay"></i></li>`;
-//     heartsCounter.innerHTML = heartImage + heartImage;
-// };
-
-/**
  * @Description - Checks collision between Player and Enemy
  */
  const checkCollisions = () => {
@@ -147,7 +137,8 @@ const player = new Player(initPlayerX, initPlayerY);
             (player.x >= enemy.x - collision && player.x <= enemy.x + collision)) {
 
             player.reset(initPlayerX, initPlayerY);
-            resetScore();
+            // resetScore();
+            endGame();
             // alert('start again!');
             console.log('Collide with enemy');
             // console.log('Score dropped by ' + score + ' point(s)!');
@@ -158,16 +149,23 @@ const player = new Player(initPlayerX, initPlayerY);
     }
 };
 
+// /**
+//  * @Description - Rating
+//  */
+// const heartsCounter = document.querySelector('.hearts');
+// const heartImage = `<li><i class="fab fa-gratipay"></i></li>`;
+// heartsCounter.innerHTML = heartImage + heartImage;
+
 /**
  * @Description - Set score
  * @type {number} - Initial state
  */
-let score = 1;
+let score = 0;
 
-const checkScore = () => {
+const setScore = () => {
     const scoreTick = document.querySelector('.score');
-    scoreTick.innerHTML = 'Score: ' + score;
-    score++;
+    scoreTick.innerHTML =  score + 1;
+    score++
 };
 
 /**
@@ -175,7 +173,7 @@ const checkScore = () => {
  */
 const resetScore = () => {
     score = 0;
-    document.querySelector('.score').innerHTML = 'Score: ' + score;
+    document.querySelector('.score').innerHTML = score;
 };
 
 /**
@@ -239,7 +237,6 @@ const initGame = () => {
     resetTimer();
     // Reset the score
     resetScore();
-    // heartsCounter.innerHTML = heartImage + heartImage + heartImage;
     // Reset enemies
     // Reset player
 };
@@ -250,6 +247,8 @@ const initGame = () => {
 const toggleModal = () => {
     const modal = document.querySelector('.modal');
     modal.classList.toggle('hidden');
+    // modalResults();
+
 };
 
 /**
@@ -257,13 +256,28 @@ const toggleModal = () => {
  */
 const closeModal = () => {
     document.querySelector('.modal-close').addEventListener('click', () => {
-        canvas.innerHTML = '';
         replayGame();
     });
 };
 
+closeModal();
+
+/**
+ * @Description - Modal results
+ */
+const modalResults = () => {
+    const totalTime = document.querySelector('.total-time');
+    const timer = document.querySelector('.timer').innerHTML;
+    const totalScore = document.querySelector('.total-score');
+
+    totalTime.innerHTML = `Total time: ${timer}`;
+    totalScore.innerHTML = `Total score: ${score}`;
+};
+
 const endGame = () => {
     toggleModal();
+    clearTimer();
+    modalResults();
 };
 
 /**
