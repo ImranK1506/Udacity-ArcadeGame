@@ -35,3 +35,7 @@ handleInput()   -   Handle keyboard events
 ## Descriptions
 
 Used [jsdoc](https://devhints.io/jsdoc) as a reference to describe functions in app.js
+
+## Preview
+
+[Arcade Game](https://udacity-javascript-arcadegame-dpfld11x4.now.sh/)
